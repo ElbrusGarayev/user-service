@@ -1,0 +1,17 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  # Settings for the oracle connection
+  datasource:
+    url:
+      jdbc:oracle:thin:@localhost:1521:orcl
+    username:
+      user_service_db
+    password:
+      user_db_password
+    driver-class-oracle:
+      jdbc:
+        driver:
+          OracleDriver
