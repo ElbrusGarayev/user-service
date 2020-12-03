@@ -5,11 +5,12 @@ import com.userservice.model.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @FeignClient(name = "ProductClient", url = "http://localhost:8081/api/product-ms")
 public interface ProductClient {
 
     @GetMapping("all")
-    List<User> getProducts(PageAndSizeDTO pageAndSizeDTO);
+    List<User> getProducts(@Valid PageAndSizeDTO pageAndSizeDTO);
 }

@@ -10,7 +10,6 @@ public interface UserMapper {
 
     UserDTO modelToDto(User user);
 
-    @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdDate", ignore = true)
     User dtoToModel(UserDTO userDTO);
 }

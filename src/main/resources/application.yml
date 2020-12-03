@@ -15,3 +15,20 @@ spring:
       jdbc:
         driver:
           OracleDriver
+  mail:
+    host: smtp.gmail.com
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    port: 587
+    properties:
+      mail:
+        smtp:
+          ssl:
+            trust: smtp.gmail.com
+          auth: true
+          starttls:
+            enable: true
+    protocol: smtp
+server:
+  servlet:
+    context-path: /api/user-ms
