@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserDTO {
 
-    String id;
+    Long id;
     @NotBlank(message = "name_is_required")
     String name;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -30,6 +30,8 @@ public class UserDTO {
     @NotBlank(message = "email_is_required")
     @Email(regexp = "^(.+)@(.+)$", message = "invalid_email_pattern")
     String email;
+    @NotBlank(message = "username_is_required")
+    String username;
     @NotBlank(message = "password_is_required")
     @Size(min = 8, message = "password_length_shouldn't_be_less_than_8")
     String password;

@@ -1,6 +1,6 @@
-package com.userservice.token.service;
+package com.userservice.service;
 
-import com.userservice.token.model.ConfirmationToken;
+import com.userservice.entity.ConfirmationToken;
 
 import java.util.Optional;
 

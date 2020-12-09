@@ -1,8 +1,8 @@
-package com.userservice.token.service.impl;
+package com.userservice.service.impl;
 
-import com.userservice.token.model.ConfirmationToken;
-import com.userservice.token.repository.ConfirmationTokenRepository;
-import com.userservice.token.service.ConfirmationTokenService;
+import com.userservice.entity.ConfirmationToken;
+import com.userservice.repository.ConfirmationTokenRepository;
+import com.userservice.service.ConfirmationTokenService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;

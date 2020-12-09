@@ -1,38 +1,34 @@
-package com.userservice.model;
+package com.userservice.entity;
 
 import com.userservice.enums.GenderEnum;
-import com.userservice.listener.UserListener;
+import com.userservice.listener.EntityListener;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "users")
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Entity
 @Builder
-@EntityListeners(value = UserListener.class)
-@Table(name = "custom_users")
-public class User {
+@EntityListeners(EntityListener.class)
+public class User extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    long id;
+    Long id;
     String name;
-    @Column(name = "birth_date")
     LocalDate birthDate;
     GenderEnum gender;
     String email;
+    @Column(unique=true)
+    String username;
     String password;
     String job;
-    @Column(name = "created_date")
-    LocalDateTime createdDate;
-    @Column(name = "last_modified_date")
-    LocalDateTime lastModifiedDate;
     boolean isEnabled;
 }

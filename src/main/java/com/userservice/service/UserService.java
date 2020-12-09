@@ -6,10 +6,7 @@ import com.userservice.dto.UserDTO;
 import java.util.List;
 
 public interface UserService {
-
-    UserDTO addUser(UserDTO userDTO);
     List<UserDTO> getAll(PageAndSizeDTO pageAndSizeDTO);
-    UserDTO update(UserDTO userDTO, long id);
-    UserDTO findByEmail(String email);
-    void activate(UserDTO userDTO);
+    UserDTO update(UserDTO userDTO, Long id);
+    void deleteUsers();
 }

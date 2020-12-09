@@ -1,4 +1,4 @@
-package com.userservice.security.jwt.model;
+package com.userservice.dto;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.experimental.FieldDefaults;
 @Data
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class AuthRequest {
+public class LoginDTO {
     String username;
     String password;
 }

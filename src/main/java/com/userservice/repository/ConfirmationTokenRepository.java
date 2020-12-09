@@ -1,6 +1,6 @@
-package com.userservice.token.repository;
+package com.userservice.repository;
 
-import com.userservice.token.model.ConfirmationToken;
+import com.userservice.entity.ConfirmationToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

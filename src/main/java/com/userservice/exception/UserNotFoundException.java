@@ -19,4 +19,8 @@ public class UserNotFoundException extends UserBaseException {
     public UserNotFoundException(ExceptionEnum exceptionEnum) {
         super(exceptionEnum.getCode(), exceptionEnum.name().toLowerCase());
     }
+
+    public UserNotFoundException() {
+        super(ExceptionEnum.USER_NOT_FOUND.getCode(), ExceptionEnum.USER_NOT_FOUND.name().toLowerCase());
+    }
 }

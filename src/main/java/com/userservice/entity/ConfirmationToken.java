@@ -1,6 +1,5 @@
-package com.userservice.token.model;
+package com.userservice.entity;
 
-import com.userservice.model.User;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +17,7 @@ public class ConfirmationToken {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long tokenid;
+    Long tokenid;
 
     String confirmationToken;
 

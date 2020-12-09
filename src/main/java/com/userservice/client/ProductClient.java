@@ -1,7 +1,7 @@
 package com.userservice.client;
 
 import com.userservice.dto.PageAndSizeDTO;
-import com.userservice.model.User;
+import com.userservice.entity.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
