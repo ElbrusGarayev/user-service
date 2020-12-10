@@ -39,10 +39,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO update(UserDTO userDTO, Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(ExceptionEnum.USER_NOT_FOUND));
+        User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
         User newUser = userMapper.dtoToModel(userDTO, user);
-        newUser.setId(id);
-        newUser.setCreatedDate(user.getCreatedDate());
         return userMapper.modelToDto(userRepository.save(newUser));
     }
 

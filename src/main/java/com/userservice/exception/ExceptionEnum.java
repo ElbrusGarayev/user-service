@@ -13,6 +13,7 @@ public enum ExceptionEnum {
     USER_NOT_FOUND("1111"),
     USER_ALREADY_EXISTS("1112"),
     USER_VALIDATION_ERROR("1113"),
+    WRONG_CREDENTIALS_ERROR("1114"),
     SERVER_ERROR("3000");
 
     final String code;

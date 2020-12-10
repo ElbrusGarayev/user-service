@@ -19,5 +19,8 @@ public interface UserMapper {
     User dtoToModel(LoginDTO userDTO);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "createdDate", ignore = true)
+    @Mapping(target = "lastModifiedDate", ignore = true)
+    @Mapping(target = "enabled", ignore = true)
     User dtoToModel(UserDTO userDTO, @MappingTarget User user);
 }

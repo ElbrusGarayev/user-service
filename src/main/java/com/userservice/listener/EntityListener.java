@@ -1,6 +1,6 @@
 package com.userservice.listener;
 
-import com.userservice.entity.BaseEntity;
+import com.userservice.entity.User;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.PrePersist;
@@ -11,12 +11,12 @@ import java.time.LocalDateTime;
 public class EntityListener {
 
     @PrePersist
-    public void prePersist(BaseEntity baseEntity) {
-        baseEntity.setCreatedDate(LocalDateTime.now());
+    public void prePersist(User user) {
+        user.setCreatedDate(LocalDateTime.now());
     }
 
     @PreUpdate
-    public void preUpdate(BaseEntity baseEntity) {
-        baseEntity.setLastModifiedDate(LocalDateTime.now());
+    public void preUpdate(User user) {
+        user.setLastModifiedDate(LocalDateTime.now());
     }
 }

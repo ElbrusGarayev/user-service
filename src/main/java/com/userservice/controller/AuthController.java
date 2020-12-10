@@ -9,6 +9,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RestController
@@ -19,8 +20,8 @@ public class AuthController {
     final AuthService authService;
 
     @PostMapping("public/login")
-    public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
-        return ResponseEntity.ok(authService.login(loginDTO));
+    public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO, HttpServletRequest request) {
+        return ResponseEntity.ok(authService.login(loginDTO, request.getRemoteAddr()));
     }
 
     @PostMapping("public/registration")

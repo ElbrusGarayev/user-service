@@ -7,17 +7,17 @@ import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
-@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 @EntityListeners(EntityListener.class)
-public class User extends BaseEntity{
+public class User{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,4 +31,6 @@ public class User extends BaseEntity{
     String password;
     String job;
     boolean isEnabled;
+    LocalDateTime createdDate;
+    LocalDateTime lastModifiedDate;
 }
