@@ -1,29 +1,28 @@
 package com.userservice.service.impl;
 
 import com.userservice.dto.LoginDTO;
+import com.userservice.dto.MailDTO;
 import com.userservice.dto.UserDTO;
 import com.userservice.encoder.PasswordEncoder;
 import com.userservice.entity.ConfirmationToken;
 import com.userservice.entity.User;
 import com.userservice.entity.UserLoginHistory;
-import com.userservice.exception.ExceptionEnum;
-import com.userservice.exception.UserAlreadyExistsException;
-import com.userservice.exception.UserNotFoundException;
-import com.userservice.exception.WrongCredentialsException;
+import com.userservice.enums.ExceptionEnum;
+import com.userservice.exception.*;
 import com.userservice.jwt.JwtUtil;
-import com.userservice.mail.service.EmailService;
 import com.userservice.mapper.UserMapper;
 import com.userservice.repository.UserLoginHistoryRepository;
 import com.userservice.repository.UserRepository;
 import com.userservice.service.AuthService;
 import com.userservice.service.ConfirmationTokenService;
+import com.userservice.service.MailService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import javax.mail.MessagingException;
 
 @Log4j2
 @Service
@@ -31,17 +30,15 @@ import java.util.Optional;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class AuthServiceImpl implements AuthService {
 
+    static final String CONFIRMATION_URL = "http://localhost:8080/api/user-ms/public/account-confirmation?token=";
+    static final String CONFIRMATION_CONTENT = "To confirm your account, please click here : ";
+
     final UserRepository userRepository;
     final JwtUtil jwtUtil;
     final UserMapper userMapper;
-    final EmailService emailService;
+    final MailService emailService;
     final ConfirmationTokenService tokenService;
     final UserLoginHistoryRepository historyRepository;
-
-    static final String SUCCESS = "success";
-    static final String SOMETHING_WENT_WRONG = "something_went_wrong";
-    static final String CONFIRMATION_URL = "http://localhost:8080/api/user-ms/public/account-confirmation?token=";
-    static final String CONFIRMATION_CONTENT = "To confirm your account, please click here : ";
 
     @Override
     public String login(LoginDTO loginDTO, String ip) {
@@ -50,12 +47,16 @@ public class AuthServiceImpl implements AuthService {
             throw new WrongCredentialsException();
         }
         String accessToken = jwtUtil.generate(user.getId().toString(), user.getEmail());
-        historyRepository.save(new UserLoginHistory(user, accessToken, ip));
+        historyRepository.save(UserLoginHistory.builder()
+                .ip(ip)
+                .accessToken(accessToken)
+                .user(user)
+                .build());
         return accessToken;
     }
 
     @Override
-    public UserDTO register(UserDTO userDTO) {
+    public UserDTO register(UserDTO userDTO) throws MessagingException {
         userRepository.findByUsername(userDTO.getUsername()).ifPresent(ex -> {
             throw new UserAlreadyExistsException(ExceptionEnum.USER_ALREADY_EXISTS);
         });
@@ -64,19 +65,19 @@ public class AuthServiceImpl implements AuthService {
         ConfirmationToken confirmationToken = new ConfirmationToken(user);
         tokenService.save(confirmationToken);
         String mailContent = CONFIRMATION_CONTENT + CONFIRMATION_URL + confirmationToken.getConfirmationToken();
-        emailService.sendMail(user.getEmail(), mailContent);
+        emailService.sendMail(MailDTO.builder()
+                .to(userDTO.getEmail())
+                .subject("Email Confirmation")
+                .content(mailContent)
+                .build());
         return userMapper.modelToDto(user);
     }
 
     @Override
-    public String activate(String token) {
-        Optional<ConfirmationToken> confirmationToken = tokenService.findToken(token);
-        if (confirmationToken.isPresent()) {
-            User user = userRepository.findByEmail(confirmationToken.get().getUser().getEmail()).orElseThrow(UserNotFoundException::new);
-            user.setEnabled(true);
-            userRepository.save(user);
-            return SUCCESS;
-        }
-        return SOMETHING_WENT_WRONG;
+    public void activate(String token) {
+        ConfirmationToken confirmationToken = tokenService.findToken(token).orElseThrow(ConfirmationTokenInvalidException::new);
+        User user = userRepository.findByEmail(confirmationToken.getUser().getEmail()).orElseThrow(UserNotFoundException::new);
+        user.setEnabled(true);
+        userRepository.save(user);
     }
 }

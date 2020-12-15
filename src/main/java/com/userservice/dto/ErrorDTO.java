@@ -1,4 +1,4 @@
-package com.userservice.exception;
+package com.userservice.dto;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;

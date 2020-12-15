@@ -24,7 +24,7 @@ public class UserController {
 
     final UserService userService;
 
-    @GetMapping("public/delete")
+    @DeleteMapping("public/delete")
     public String deleteUser(){
         userService.deleteUsers();
         return "deleted";

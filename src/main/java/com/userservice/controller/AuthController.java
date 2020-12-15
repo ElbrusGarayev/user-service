@@ -6,31 +6,35 @@ import com.userservice.service.AuthService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.mail.MessagingException;
+import javax.naming.ConfigurationException;
 import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@RequestMapping("public")
 public class AuthController {
 
     final AuthService authService;
 
-    @PostMapping("public/login")
-    public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO, HttpServletRequest request) {
-        return ResponseEntity.ok(authService.login(loginDTO, request.getRemoteAddr()));
+    @PostMapping("login")
+    public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO, String ip) {
+        return ResponseEntity.ok(authService.login(loginDTO, ip));
     }
 
-    @PostMapping("public/registration")
-    public ResponseEntity<UserDTO> register(@Valid @RequestBody UserDTO userDTO) {
+    @PostMapping("registration")
+    public ResponseEntity<UserDTO> register(@Valid @RequestBody UserDTO userDTO) throws MessagingException {
         return ResponseEntity.ok(authService.register(userDTO));
     }
 
-    @GetMapping("public/account-confirmation")
-    public ResponseEntity<String> confirmUserAccount(@RequestParam("token") String token) {
-        return ResponseEntity.ok(authService.activate(token));
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @GetMapping("account-confirmation")
+    public void confirmUserAccount(@RequestParam String token) {
+        authService.activate(token);
     }
 }

@@ -1,9 +1,8 @@
 package com.userservice.exception;
 
+import com.userservice.enums.ExceptionEnum;
 import lombok.AccessLevel;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 @Getter

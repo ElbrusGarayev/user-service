@@ -2,13 +2,10 @@ package com.userservice.service.impl;
 
 import com.userservice.dto.PageAndSizeDTO;
 import com.userservice.dto.UserDTO;
-import com.userservice.exception.ExceptionEnum;
-import com.userservice.exception.UserAlreadyExistsException;
+import com.userservice.entity.User;
 import com.userservice.exception.UserNotFoundException;
 import com.userservice.mapper.UserMapper;
-import com.userservice.entity.User;
 import com.userservice.repository.UserRepository;
-import com.userservice.encoder.PasswordEncoder;
 import com.userservice.service.UserService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

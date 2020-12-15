@@ -41,6 +41,7 @@ dependencies {
 	compile "io.jsonwebtoken:jjwt:0.9.1"
 	compile "javax.xml.bind:jaxb-api:2.3.0"
 	compile("com.h2database:h2")
+	compile 'io.micrometer:micrometer-registry-prometheus:latest.release'
 	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
 	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
 	runtimeOnly 'com.oracle.ojdbc:ojdbc8'
