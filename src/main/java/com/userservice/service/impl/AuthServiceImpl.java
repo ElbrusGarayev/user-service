@@ -23,6 +23,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
+import java.time.LocalDateTime;
 
 @Log4j2
 @Service
@@ -51,6 +52,7 @@ public class AuthServiceImpl implements AuthService {
                 .ip(ip)
                 .accessToken(accessToken)
                 .user(user)
+                .loginDateTime(LocalDateTime.now())
                 .build());
         return accessToken;
     }

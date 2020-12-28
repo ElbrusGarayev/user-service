@@ -6,14 +6,15 @@ import com.userservice.service.AuthService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
-import javax.naming.ConfigurationException;
 import javax.validation.Valid;
 
+@Log4j2
 @RestController
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -29,6 +30,7 @@ public class AuthController {
 
     @PostMapping("registration")
     public ResponseEntity<UserDTO> register(@Valid @RequestBody UserDTO userDTO) throws MessagingException {
+        log.warn("Something is HERE! " + userDTO);
         return ResponseEntity.ok(authService.register(userDTO));
     }
 

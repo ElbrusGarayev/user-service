@@ -1,44 +1,22 @@
-#spring:
-#  jpa:
-#    hibernate:
-#      ddl-auto: none
-#    show-sql: true
-#  # Settings for the oracle connection
-#  datasource:
-#    url:
-#      jdbc:oracle:thin:@localhost:1521:orcl
-#    username:
-#      user_service_db
-#    password:
-#      user_db_password
-#    driver-class-oracle:
-#      jdbc:
-#        driver:
-#          OracleDriver
 spring:
-  h2:
-    console:
-      enabled: true
-      path: /public/h2
   datasource:
-    url: jdbc:h2:file:~/test
-    username: sa
-    password:
-    driverClassName: org.h2.Driver
+    url: ${USER_SERVICE_DB_URL}
+    username: ${USER_SERVICE_DB_USERNAME}
+    password: ${USER_SERVICE_DB_PASSWORD}
   mail:
-    host: smtp.gmail.com
+#    host: smtp.gmail.com
     username: ${MAIL_USERNAME}
     password: ${MAIL_PASSWORD}
-    port: 587
-    properties:
-      mail:
-        smtp:
-          ssl:
-            trust: smtp.gmail.com
-          auth: true
-          starttls:
-            enable: true
-    protocol: smtp
+#    port: 587
+#    properties:
+#      mail:
+#        smtp:
+#          ssl:
+#            trust: smtp.gmail.com
+#          auth: true
+#          starttls:
+#            enable: true
+#    protocol: smtp
 server:
   servlet:
     context-path: /api/user-ms

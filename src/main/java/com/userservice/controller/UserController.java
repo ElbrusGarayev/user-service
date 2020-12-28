@@ -1,5 +1,7 @@
 package com.userservice.controller;
 
+import com.userservice.dto.OrderBodyDTO;
+import com.userservice.dto.OrderDTO;
 import com.userservice.dto.PageAndSizeDTO;
 import com.userservice.dto.UserDTO;
 import com.userservice.jwt.JwtUser;
@@ -10,7 +12,6 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -37,7 +38,13 @@ public class UserController {
 
     @PutMapping
     public ResponseEntity<UserDTO> update(@Valid @RequestBody UserDTO userDTO, Authentication auth) {
-        JwtUser jwtUser = (JwtUser) auth.getPrincipal();
-        return ResponseEntity.ok(userService.update(userDTO, jwtUser.getId()));
+        return ResponseEntity.ok(userService.update(userDTO, ((JwtUser) auth.getPrincipal()).getId()));
+    }
+
+    @PostMapping("purchasing")
+    public ResponseEntity<OrderDTO> purchaseProduct(@RequestBody OrderBodyDTO orderBodyDTO, Authentication auth){
+        OrderDTO newOrderBodyD = userService.purchaseProduct(orderBodyDTO, auth);
+        log.info(newOrderBodyD);
+        return ResponseEntity.ok(newOrderBodyD);
     }
 }

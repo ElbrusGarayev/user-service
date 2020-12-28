@@ -1,0 +1,25 @@
+[
+  {
+    "card_number": "1234567891234567",
+    "amount": 15,
+    "pin": "xxxx"
+  },
+  {
+    "productId": "5fbb9b31ad0cff40cc82e2f7",
+    "productCount": 3,
+    "paymentDTO": {
+      "cardNumber": "32135481312135",
+      "pin": "1234",
+      "amount": "15"
+    }
+  },
+  {
+    "birthDate": "2000-05-01",
+    "username": "garayev.elbrus@gmail.com",
+    "email": "garayev.elbrus@gmail.com",
+    "gender": "M",
+    "job": "Developer",
+    "name": "El",
+    "password": "weirubfkjfbd"
+  }
+]

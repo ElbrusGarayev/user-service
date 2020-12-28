@@ -24,11 +24,4 @@ public class UserLoginHistory{
     String accessToken;
     String ip;
     LocalDateTime loginDateTime;
-
-    public UserLoginHistory(User user, String accessToken, String ip) {
-        this.user = user;
-        this.accessToken = accessToken;
-        this.ip = ip;
-        this.loginDateTime = LocalDateTime.now();
-    }
 }

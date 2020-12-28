@@ -1,6 +1,7 @@
 package com.userservice.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.userservice.enums.GenderEnum;
 import lombok.*;
 import lombok.experimental.FieldDefaults;

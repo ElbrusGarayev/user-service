@@ -1,9 +1,13 @@
 package com.userservice.client;
 
+import com.userservice.dto.OrderBodyDTO;
+import com.userservice.dto.ProductDetailDTO;
 import com.userservice.dto.PageAndSizeDTO;
-import com.userservice.entity.User;
+import com.userservice.dto.ProductDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -12,5 +16,8 @@ import java.util.List;
 public interface ProductClient {
 
     @GetMapping("all")
-    List<User> getProducts(@Valid PageAndSizeDTO pageAndSizeDTO);
+    List<ProductDTO> getProducts(@Valid PageAndSizeDTO pageAndSizeDTO);
+
+    @PostMapping("purchasing")
+    ProductDetailDTO purchaseProduct(@RequestBody OrderBodyDTO orderBodyDTO);
 }

@@ -2,10 +2,7 @@ package com.userservice.controller;
 
 import com.userservice.dto.ErrorDTO;
 import com.userservice.enums.ExceptionEnum;
-import com.userservice.exception.ConfirmationTokenInvalidException;
-import com.userservice.exception.UserAlreadyExistsException;
-import com.userservice.exception.UserNotFoundException;
-import com.userservice.exception.WrongCredentialsException;
+import com.userservice.exception.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -50,8 +47,7 @@ public class UserExceptionController {
     public Object handleException(MethodArgumentNotValidException ex) {
         log.error ("Method argument not valid exception", ex.getMessage());
         FieldError fieldError = ex.getBindingResult().getFieldError();
-        return ErrorDTO
-                .builder()
+        return ErrorDTO.builder()
                 .code(ExceptionEnum.USER_VALIDATION_ERROR.getCode())
                 .message(Objects.requireNonNull(fieldError).getDefaultMessage())
                 .build();
@@ -73,7 +69,29 @@ public class UserExceptionController {
     public ErrorDTO handleException(ConfirmationTokenInvalidException ex){
         log.error ("{} error occurred while processing request.", ex.getMessage());
         return ErrorDTO.builder()
-                .code(ExceptionEnum.CONFIRMATION_TOKEN_INVALID.getCode())
+                .code(ex.getCode())
+                .message(ex.getMessage())
+                .dateTime(LocalDateTime.now())
+                .build();
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(WrongCardCredentialsException.class)
+    public ErrorDTO handleException(WrongCardCredentialsException ex){
+        log.error ("{} error occurred while processing request.", ex.getMessage());
+        return ErrorDTO.builder()
+                .code(ex.getCode())
+                .message(ex.getMessage())
+                .dateTime(LocalDateTime.now())
+                .build();
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(CardNotFoundException.class)
+    public ErrorDTO handleException(CardNotFoundException ex){
+        log.error ("{} error occurred while processing request.", ex.getMessage());
+        return ErrorDTO.builder()
+                .code(ex.getCode())
                 .message(ex.getMessage())
                 .dateTime(LocalDateTime.now())
                 .build();
