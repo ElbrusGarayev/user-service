@@ -2,7 +2,6 @@ package com.userservice.entity;
 
 import com.userservice.enums.OrderStatusEnum;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -22,7 +21,7 @@ public class Order {
     OrderStatusEnum status;
     @OneToOne
     User user;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     ProductDetail productDetail;
     @OneToOne
     Card card;

@@ -19,7 +19,7 @@ public class ConfirmationToken {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long tokenid;
 
-    String confirmationToken;
+    String token;
 
     @Temporal(TemporalType.TIMESTAMP)
     Date createdDate;
@@ -31,6 +31,6 @@ public class ConfirmationToken {
     public ConfirmationToken(User user) {
         this.user = user;
         createdDate = new Date();
-        confirmationToken = UUID.randomUUID().toString();
+        token = UUID.randomUUID().toString();
     }
 }

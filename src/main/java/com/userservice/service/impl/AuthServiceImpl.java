@@ -21,12 +21,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import javax.mail.MessagingException;
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 
 @Log4j2
 @Service
+@Transactional
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class AuthServiceImpl implements AuthService {
@@ -65,8 +68,10 @@ public class AuthServiceImpl implements AuthService {
         userDTO.setPassword(PasswordEncoder.sha256(userDTO.getPassword()));
         User user = userRepository.save(userMapper.dtoToModel(userDTO));
         ConfirmationToken confirmationToken = new ConfirmationToken(user);
+        log.warn("Transaction is open?  " + TransactionSynchronizationManager.isActualTransactionActive());
         tokenService.save(confirmationToken);
-        String mailContent = CONFIRMATION_CONTENT + CONFIRMATION_URL + confirmationToken.getConfirmationToken();
+        log.warn("Transaction is open?  " + TransactionSynchronizationManager.isActualTransactionActive());
+        String mailContent = CONFIRMATION_CONTENT + CONFIRMATION_URL + confirmationToken.getToken();
         emailService.sendMail(MailDTO.builder()
                 .to(userDTO.getEmail())
                 .subject("Email Confirmation")

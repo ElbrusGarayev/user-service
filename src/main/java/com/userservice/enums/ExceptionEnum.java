@@ -17,6 +17,8 @@ public enum ExceptionEnum {
     CONFIRMATION_TOKEN_INVALID("1115"),
     CARD_NOT_FOUND("1116"),
     WRONG_CARD_CREDENTIALS("1117"),
+    NOT_ENOUGH_PRODUCT("1118"),
+    PRODUCT_NOT_FOUND("1119"),
     SERVER_ERROR("3000");
 
     final String code;

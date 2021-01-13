@@ -18,5 +18,6 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String cardNumber;
-    String pin;
+    String cvv;
+    String expDate;
 }

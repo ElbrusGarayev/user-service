@@ -25,14 +25,18 @@ public class UserDTO {
     @NotBlank(message = "name_is_required")
     String name;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     LocalDate birthDate;
     @NotNull(message = "gender_is_required")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     GenderEnum gender;
     @NotBlank(message = "email_is_required")
     @Email(regexp = "^(.+)@(.+)$", message = "invalid_email_pattern")
     String email;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @NotBlank(message = "username_is_required")
     String username;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @NotBlank(message = "password_is_required")
     @Size(min = 8, message = "password_length_shouldn't_be_less_than_8")
     String password;
@@ -42,6 +46,6 @@ public class UserDTO {
     LocalDateTime createdDate;
     @JsonIgnore
     LocalDateTime lastModifiedDate;
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     boolean isEnabled;
 }

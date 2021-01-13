@@ -97,6 +97,28 @@ public class UserExceptionController {
                 .build();
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NotEnoughProductException.class)
+    public ErrorDTO handleException(NotEnoughProductException ex){
+        log.error ("{} error occurred while processing request.", ex.getMessage());
+        return ErrorDTO.builder()
+                .code(ex.getCode())
+                .message(ex.getMessage())
+                .dateTime(LocalDateTime.now())
+                .build();
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ErrorDTO handleException(ProductNotFoundException ex){
+        log.error ("{} error occurred while processing request.", ex.getMessage());
+        return ErrorDTO.builder()
+                .code(ex.getCode())
+                .message(ex.getMessage())
+                .dateTime(LocalDateTime.now())
+                .build();
+    }
+
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Throwable.class)
     public ErrorDTO handleException(Throwable ex){

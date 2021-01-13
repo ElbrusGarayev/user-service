@@ -57,7 +57,7 @@ public class PostgreConfig {
                 "org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy");
         properties.put("hibernate.physical_naming_strategy",
                 "org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy");
-        properties.put("hibernate.hbm2ddl.auto", "update");
+        properties.put("hibernate.hbm2ddl.auto", "create-drop");
         LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = builder
                 .dataSource(dataSource)
                 .packages("com.userservice.entity")

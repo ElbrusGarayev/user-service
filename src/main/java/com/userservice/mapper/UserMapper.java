@@ -5,6 +5,7 @@ import com.userservice.entity.Card;
 import com.userservice.entity.Order;
 import com.userservice.entity.ProductDetail;
 import com.userservice.entity.User;
+import feign.Response;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;

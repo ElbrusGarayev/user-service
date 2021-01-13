@@ -19,7 +19,7 @@ public class ConfirmationTokenServiceImpl implements ConfirmationTokenService {
 
     @Override
     public Optional<ConfirmationToken> findToken(String token) {
-        return tokenRepository.findByConfirmationToken(token);
+        return tokenRepository.findByToken(token);
     }
 
     @Override

@@ -9,6 +9,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
@@ -30,7 +31,7 @@ public class AuthController {
 
     @PostMapping("registration")
     public ResponseEntity<UserDTO> register(@Valid @RequestBody UserDTO userDTO) throws MessagingException {
-        log.warn("Something is HERE! " + userDTO);
+        log.warn("Transaction is open?  " + TransactionSynchronizationManager.isActualTransactionActive());
         return ResponseEntity.ok(authService.register(userDTO));
     }
 

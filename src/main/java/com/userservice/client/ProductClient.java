@@ -1,5 +1,6 @@
 package com.userservice.client;
 
+import com.userservice.config.ProductClientConfig;
 import com.userservice.dto.OrderBodyDTO;
 import com.userservice.dto.ProductDetailDTO;
 import com.userservice.dto.PageAndSizeDTO;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import javax.validation.Valid;
 import java.util.List;
 
-@FeignClient(name = "ProductClient", url = "http://localhost:8081/api/product-ms")
+@FeignClient(name = "ProductClient", url = "http://localhost:8081/api/product-ms", configuration = ProductClientConfig.class)
 public interface ProductClient {
 
     @GetMapping("all")

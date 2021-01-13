@@ -1,6 +1,6 @@
 package com.userservice.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -13,6 +13,6 @@ public class CardDTO {
 
     long id;
     String cardNumber;
-//    @JsonIgnore
-    String pin;
+    String cvv;
+    String expDate;
 }
