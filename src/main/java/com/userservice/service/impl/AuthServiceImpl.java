@@ -21,10 +21,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import javax.mail.MessagingException;
-import javax.transaction.Transactional;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 
 @Log4j2
@@ -61,7 +62,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public UserDTO register(UserDTO userDTO) throws MessagingException {
+    public UserDTO register(UserDTO userDTO) throws MessagingException, UnsupportedEncodingException {
         userRepository.findByUsername(userDTO.getUsername()).ifPresent(ex -> {
             throw new UserAlreadyExistsException(ExceptionEnum.USER_ALREADY_EXISTS);
         });

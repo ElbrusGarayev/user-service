@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
 
 @Log4j2
 @RestController
@@ -30,7 +31,7 @@ public class AuthController {
     }
 
     @PostMapping("registration")
-    public ResponseEntity<UserDTO> register(@Valid @RequestBody UserDTO userDTO) throws MessagingException {
+    public ResponseEntity<UserDTO> register(@Valid @RequestBody UserDTO userDTO) throws MessagingException, UnsupportedEncodingException {
         log.warn("Transaction is open?  " + TransactionSynchronizationManager.isActualTransactionActive());
         return ResponseEntity.ok(authService.register(userDTO));
     }

@@ -10,7 +10,9 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
 
 @Service
 @RequiredArgsConstructor
@@ -20,9 +22,10 @@ public class MailServiceImpl implements MailService {
     final JavaMailSender mailSender;
 
     @Override
-    public void sendMail(MailDTO mailDTO) throws MessagingException {
+    public void sendMail(MailDTO mailDTO) throws MessagingException, UnsupportedEncodingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
+//        helper.setFrom(new InternetAddress("", "User Service"));
         helper.setTo(mailDTO.getTo());
         helper.setSubject(mailDTO.getSubject());
         helper.setText(mailDTO.getContent());
