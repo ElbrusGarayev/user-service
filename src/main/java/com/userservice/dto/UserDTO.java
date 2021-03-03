@@ -26,7 +26,7 @@ public class UserDTO {
     String name;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    LocalDate birthDate;
+    String birthDate;
     @NotNull(message = "gender_is_required")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     GenderEnum gender;

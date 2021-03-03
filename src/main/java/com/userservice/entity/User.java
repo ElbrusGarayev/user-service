@@ -23,7 +23,7 @@ public class User{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String name;
-    LocalDate birthDate;
+    String birthDate;
     GenderEnum gender;
     String email;
     @Column(unique=true)
